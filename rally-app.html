@@ -1287,6 +1287,167 @@
       color: var(--color-text-primary);
     }
 
+    /* ============================================================
+       DESIGN SYSTEM PAGE (Phase 7)
+       ============================================================ */
+
+    .ds-header {
+      padding: var(--space-5) var(--space-4) var(--space-3);
+    }
+    .ds-title {
+      font: var(--text-title);
+      color: var(--color-text-primary);
+      margin: 0;
+      letter-spacing: var(--tracking-tight);
+    }
+    .ds-subtitle {
+      font: var(--text-caption);
+      color: var(--color-text-tertiary);
+      margin: var(--space-1) 0 0;
+    }
+    .ds-section {
+      padding: var(--space-6) var(--space-4);
+      border-top: 1px solid var(--color-border);
+    }
+    .ds-heading {
+      font: var(--text-heading);
+      color: var(--color-text-primary);
+      margin: 0 0 var(--space-4);
+    }
+    .ds-subheading {
+      font: var(--text-overline);
+      color: var(--color-text-quaternary);
+      letter-spacing: var(--tracking-wider);
+      text-transform: uppercase;
+      margin: var(--space-5) 0 var(--space-3);
+    }
+    .ds-section > .ds-subheading:first-of-type {
+      margin-top: 0;
+    }
+
+    /* Swatches */
+    .swatch-row {
+      display: flex;
+      gap: var(--space-3);
+      overflow-x: auto;
+      padding: var(--space-1) 0 var(--space-2);
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .swatch-row::-webkit-scrollbar { display: none; }
+    .swatch {
+      flex: 0 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-1);
+      min-width: 56px;
+    }
+    .swatch-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    }
+    .swatch-circle.bordered { border: 1px solid var(--color-border); }
+    .swatch-name {
+      font-family: var(--font-family);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+    }
+    .swatch-hex {
+      font-family: var(--font-family);
+      font-size: 10px;
+      color: var(--color-text-quaternary);
+      letter-spacing: 0.02em;
+    }
+
+    /* Type samples */
+    .type-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+    }
+    .type-sample {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+    .type-sample-title { font: var(--text-title); color: var(--color-text-primary); letter-spacing: var(--tracking-tight); }
+    .type-sample-heading { font: var(--text-heading); color: var(--color-text-primary); }
+    .type-sample-body { font: var(--text-body); color: var(--color-text-primary); }
+    .type-sample-label { font: var(--text-label); color: var(--color-text-primary); }
+    .type-sample-caption { font: var(--text-caption); color: var(--color-text-primary); }
+    .type-sample-overline { font: var(--text-overline); color: var(--color-text-primary); letter-spacing: var(--tracking-wider); text-transform: uppercase; }
+    .type-sample-meta {
+      font: var(--text-caption);
+      color: var(--color-text-quaternary);
+    }
+
+    /* Spacing scale */
+    .spacing-scale {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+    .spacing-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .spacing-label {
+      font: var(--text-caption);
+      color: var(--color-text-secondary);
+      min-width: 96px;
+    }
+    .spacing-bar {
+      height: 12px;
+      background: var(--color-accent-subtle);
+      border-radius: 2px;
+    }
+
+    /* Components list */
+    .components-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+    }
+    .component-item {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .component-item-label {
+      font: var(--text-caption);
+      color: var(--color-text-quaternary);
+    }
+    .component-row {
+      display: flex;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    /* Icons grid */
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-4);
+    }
+    .icon-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) 0;
+    }
+    .icon-item svg { color: var(--color-text-primary); }
+    .icon-item span {
+      font-family: var(--font-family);
+      font-size: 11px;
+      color: var(--color-text-quaternary);
+    }
+
     /* Placeholder styling for screens not yet built */
     .placeholder {
       flex: 1;
@@ -1338,6 +1499,7 @@
     <button data-screen="mygroups" data-desc="Groups you created or joined — with pending applicant management.">My Groups</button>
     <button data-screen="profile" data-desc="Your profile — bio, skills, stats, account menu.">Profile</button>
     <button data-screen="search" data-desc="Search groups with category and size filters.">Search</button>
+    <button data-screen="designsystem" data-desc="Design system reference — colors, typography, spacing, components, and icons.">Design System</button>
   </nav>
 
   <!-- Device stage -->
@@ -1994,6 +2156,239 @@
               Profile
             </button>
           </nav>
+        </div>
+
+        <!-- Screen: Design System -->
+        <div class="screen" data-screen="designsystem">
+          <div class="status-bar-mount"></div>
+
+          <div class="screen-content">
+            <div class="ds-header">
+              <h1 class="ds-title">Design System</h1>
+              <p class="ds-subtitle">Rally — foundation and components</p>
+            </div>
+
+            <!-- COLORS -->
+            <section class="ds-section">
+              <h2 class="ds-heading">Colors</h2>
+
+              <h3 class="ds-subheading">Neutral</h3>
+              <div class="swatch-row">
+                <div class="swatch"><div class="swatch-circle bordered" style="background: var(--color-white);"></div><span class="swatch-name">white</span><span class="swatch-hex">FFFFFF</span></div>
+                <div class="swatch"><div class="swatch-circle" style="background: var(--color-gray-50);"></div><span class="swatch-name">gray-50</span><span class="swatch-hex">FAFAFA</span></div>
+                <div class="swatch"><div class="swatch-circle" style="background: var(--color-gray-100);"></div><span class="swatch-name">gray-100</span><span class="swatch-hex">F4F4F5</span></div>
+                <div class="swatch"><div class="swatch-circle" style="background: var(--color-gray-200);"></div><span class="swatch-name">gray-200</span><span class="swatch-hex">E4E4E7</span></div>
+                <div class="swatch"><div class="swatch-circle" style="background: var(--color-gray-300);"></div><span class="swatch-name">gray-300</span><span class="swatch-hex">D4D4D8</span></div>
+                <div class="swatch"><div class="swatch-circle" style="background: var(--color-gray-400);"></div><span class="swatch-name">gray-400</span><span class="swatch-hex">A1A1AA</span></div>
+                <div class="swatch"><div class="swatch-circle" style="background: var(--color-gray-500);"></div><span class="swatch-name">gray-500</span><span class="swatch-hex">71717A</span></div>
+                <div class="swatch"><div class="swatch-circle" style="background: var(--color-gray-600);"></div><span class="swatch-name">gray-600</span><span class="swatch-hex">52525B</span></div>
+                <div class="swatch"><div class="swatch-circle" style="background: var(--color-gray-700);"></div><span class="swatch-name">gray-700</span><span class="swatch-hex">3F3F46</span></div>
+                <div class="swatch"><div class="swatch-circle" style="background: var(--color-gray-800);"></div><span class="swatch-name">gray-800</span><span class="swatch-hex">27272A</span></div>
+                <div class="swatch"><div class="swatch-circle" style="background: var(--color-gray-900);"></div><span class="swatch-name">gray-900</span><span class="swatch-hex">18181B</span></div>
+              </div>
+
+              <h3 class="ds-subheading">Accent</h3>
+              <div class="swatch-row">
+                <div class="swatch"><div class="swatch-circle" style="background: var(--color-accent);"></div><span class="swatch-name">accent</span><span class="swatch-hex">4F46E5</span></div>
+                <div class="swatch"><div class="swatch-circle" style="background: var(--color-accent-hover);"></div><span class="swatch-name">hover</span><span class="swatch-hex">4338CA</span></div>
+                <div class="swatch"><div class="swatch-circle" style="background: var(--color-accent-pressed);"></div><span class="swatch-name">pressed</span><span class="swatch-hex">3730A3</span></div>
+                <div class="swatch"><div class="swatch-circle bordered" style="background: var(--color-accent-subtle);"></div><span class="swatch-name">subtle</span><span class="swatch-hex">E0E7FF</span></div>
+                <div class="swatch"><div class="swatch-circle bordered" style="background: var(--color-accent-light);"></div><span class="swatch-name">light</span><span class="swatch-hex">EEF2FF</span></div>
+              </div>
+
+              <h3 class="ds-subheading">Semantic</h3>
+              <div class="swatch-row">
+                <div class="swatch"><div class="swatch-circle" style="background: var(--color-success);"></div><span class="swatch-name">success</span><span class="swatch-hex">059669</span></div>
+                <div class="swatch"><div class="swatch-circle" style="background: var(--color-error);"></div><span class="swatch-name">error</span><span class="swatch-hex">DC2626</span></div>
+                <div class="swatch"><div class="swatch-circle" style="background: var(--color-warning);"></div><span class="swatch-name">warning</span><span class="swatch-hex">D97706</span></div>
+              </div>
+            </section>
+
+            <!-- TYPOGRAPHY -->
+            <section class="ds-section">
+              <h2 class="ds-heading">Typography</h2>
+              <div class="type-list">
+                <div class="type-sample">
+                  <div class="type-sample-title">Screen titles</div>
+                  <div class="type-sample-meta">text-title · 28 / 700</div>
+                </div>
+                <div class="type-sample">
+                  <div class="type-sample-heading">Section headers</div>
+                  <div class="type-sample-meta">text-heading · 18 / 600</div>
+                </div>
+                <div class="type-sample">
+                  <div class="type-sample-body">Body text reads like this</div>
+                  <div class="type-sample-meta">text-body · 15 / 400</div>
+                </div>
+                <div class="type-sample">
+                  <div class="type-sample-label">Labels and metadata</div>
+                  <div class="type-sample-meta">text-label · 13 / 500</div>
+                </div>
+                <div class="type-sample">
+                  <div class="type-sample-caption">Secondary information</div>
+                  <div class="type-sample-meta">text-caption · 13 / 400</div>
+                </div>
+                <div class="type-sample">
+                  <div class="type-sample-overline">Caps labels</div>
+                  <div class="type-sample-meta">text-overline · 11 / 500</div>
+                </div>
+              </div>
+            </section>
+
+            <!-- SPACING -->
+            <section class="ds-section">
+              <h2 class="ds-heading">Spacing</h2>
+              <div class="spacing-scale">
+                <div class="spacing-item"><span class="spacing-label">space-1 · 4</span><div class="spacing-bar" style="width: 4px;"></div></div>
+                <div class="spacing-item"><span class="spacing-label">space-2 · 8</span><div class="spacing-bar" style="width: 8px;"></div></div>
+                <div class="spacing-item"><span class="spacing-label">space-3 · 12</span><div class="spacing-bar" style="width: 12px;"></div></div>
+                <div class="spacing-item"><span class="spacing-label">space-4 · 16</span><div class="spacing-bar" style="width: 16px;"></div></div>
+                <div class="spacing-item"><span class="spacing-label">space-5 · 20</span><div class="spacing-bar" style="width: 20px;"></div></div>
+                <div class="spacing-item"><span class="spacing-label">space-6 · 24</span><div class="spacing-bar" style="width: 24px;"></div></div>
+                <div class="spacing-item"><span class="spacing-label">space-7 · 32</span><div class="spacing-bar" style="width: 32px;"></div></div>
+                <div class="spacing-item"><span class="spacing-label">space-8 · 40</span><div class="spacing-bar" style="width: 40px;"></div></div>
+                <div class="spacing-item"><span class="spacing-label">space-9 · 48</span><div class="spacing-bar" style="width: 48px;"></div></div>
+                <div class="spacing-item"><span class="spacing-label">space-10 · 64</span><div class="spacing-bar" style="width: 64px;"></div></div>
+              </div>
+            </section>
+
+            <!-- COMPONENTS -->
+            <section class="ds-section">
+              <h2 class="ds-heading">Components</h2>
+
+              <h3 class="ds-subheading">Buttons</h3>
+              <div class="components-list">
+                <div class="component-item">
+                  <div class="btn-row">
+                    <button class="btn-primary">Primary</button>
+                    <button class="btn-secondary">Secondary</button>
+                  </div>
+                  <span class="component-item-label">btn-primary · btn-secondary</span>
+                </div>
+                <div class="component-item">
+                  <div class="btn-row">
+                    <button class="btn-primary btn-sm">Primary sm</button>
+                    <button class="btn-secondary btn-sm">Secondary sm</button>
+                  </div>
+                  <span class="component-item-label">btn-sm modifier</span>
+                </div>
+              </div>
+
+              <h3 class="ds-subheading">Pills & Chips</h3>
+              <div class="components-list">
+                <div class="component-item">
+                  <div class="component-row">
+                    <button class="pill">Default</button>
+                    <button class="pill active">Active</button>
+                  </div>
+                  <span class="component-item-label">pill — radio-like (Home categories)</span>
+                </div>
+                <div class="component-item">
+                  <div class="component-row">
+                    <button class="filter-chip">Default</button>
+                    <button class="filter-chip active">Active</button>
+                  </div>
+                  <span class="component-item-label">filter-chip — toggle-like (Search filters)</span>
+                </div>
+                <div class="component-item">
+                  <div class="component-row">
+                    <span class="tag">Skill</span>
+                    <span class="pill-tag">Category</span>
+                    <span class="badge">Badge</span>
+                    <span class="badge-pending" style="position: static;">3 pending</span>
+                  </div>
+                  <span class="component-item-label">tag · pill-tag · badge · badge-pending</span>
+                </div>
+              </div>
+
+              <h3 class="ds-subheading">Inputs</h3>
+              <div class="components-list">
+                <div class="component-item">
+                  <input class="input" placeholder="Default input" />
+                  <span class="component-item-label">input — form field</span>
+                </div>
+                <div class="component-item">
+                  <div class="search-input-wrapper" style="padding: 0; position: relative;">
+                    <svg class="search-icon" style="left: var(--space-3);" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                    <input class="search-input" placeholder="Search input" />
+                  </div>
+                  <span class="component-item-label">search-input — surface variant</span>
+                </div>
+              </div>
+
+              <h3 class="ds-subheading">Card</h3>
+              <div class="components-list">
+                <div class="component-item">
+                  <div class="group-card" style="margin: 0; width: 100%; cursor: default;">
+                    <div class="card-top">
+                      <span class="pill-tag">Tech</span>
+                      <span class="card-time">2h ago</span>
+                    </div>
+                    <div class="card-name">Group card</div>
+                    <div class="card-desc">White surface, 1px border, no shadow — used across feed and search.</div>
+                    <div class="card-bottom">
+                      <span class="spots">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        3/5 spots
+                      </span>
+                      <span class="card-creator">by Someone</span>
+                    </div>
+                  </div>
+                  <span class="component-item-label">group-card</span>
+                </div>
+              </div>
+            </section>
+
+            <!-- ICONS -->
+            <section class="ds-section">
+              <h2 class="ds-heading">Icons</h2>
+              <p class="ds-subtitle" style="margin: 0 0 var(--space-4);">Lucide-style · 24px · 1.5px stroke · currentColor</p>
+              <div class="icon-grid">
+                <div class="icon-item">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+                  <span>compass</span>
+                </div>
+                <div class="icon-item">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                  <span>search</span>
+                </div>
+                <div class="icon-item">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                  <span>plus</span>
+                </div>
+                <div class="icon-item">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  <span>user</span>
+                </div>
+                <div class="icon-item">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+                  <span>bell</span>
+                </div>
+                <div class="icon-item">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+                  <span>arrow-left</span>
+                </div>
+                <div class="icon-item">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+                  <span>share</span>
+                </div>
+                <div class="icon-item">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+                  <span>chevron-right</span>
+                </div>
+                <div class="icon-item">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <span>map-pin</span>
+                </div>
+                <div class="icon-item">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                  <span>x</span>
+                </div>
+              </div>
+            </section>
+
+            <div style="height: var(--safe-area-bottom);"></div>
+          </div>
         </div>
 
       </div>
