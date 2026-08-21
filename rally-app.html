@@ -689,6 +689,223 @@
     .btn-primary:hover { background: var(--color-accent-hover); }
     .btn-primary:active { background: var(--color-accent-pressed); }
 
+    /* ============================================================
+       CREATE FORM COMPONENTS (Phase 3)
+       ============================================================ */
+
+    /* Top nav — centered title variant */
+    .top-nav.top-nav-centered {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      padding: 0 var(--space-4);
+    }
+    .nav-text {
+      font: var(--text-label);
+      color: var(--color-text-secondary);
+      min-height: var(--touch-min);
+      display: inline-flex;
+      align-items: center;
+      justify-self: start;
+      transition: color var(--transition-fast);
+    }
+    .nav-text:hover { color: var(--color-text-primary); }
+    .nav-title {
+      font: var(--text-body-medium);
+      color: var(--color-text-primary);
+      align-self: center;
+      white-space: nowrap;
+    }
+
+    /* Form */
+    .form {
+      padding: var(--space-5) var(--space-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+    }
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+    .field-label {
+      font: var(--text-label);
+      color: var(--color-text-secondary);
+    }
+    .field-hint {
+      font: var(--text-caption);
+      color: var(--color-text-quaternary);
+      margin: var(--space-1) 0 0;
+    }
+
+    /* Input */
+    .input {
+      min-height: var(--touch-min);
+      padding: 0 var(--space-3);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-input);
+      background: var(--color-surface);
+      font: var(--text-body);
+      color: var(--color-text-primary);
+      width: 100%;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+      font-family: var(--font-family);
+    }
+    .input::placeholder { color: var(--color-text-quaternary); }
+    .input:focus {
+      outline: none;
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px var(--color-accent-light);
+    }
+
+    /* Textarea variant */
+    .textarea {
+      min-height: 96px;
+      padding: var(--space-3);
+      resize: none;
+      line-height: 1.5;
+    }
+    .textarea-wrapper { position: relative; }
+    .char-counter {
+      position: absolute;
+      bottom: var(--space-2);
+      right: var(--space-3);
+      font: var(--text-caption);
+      color: var(--color-text-quaternary);
+      pointer-events: none;
+      background: var(--color-surface);
+      padding-left: var(--space-1);
+    }
+
+    /* Form pills — wrap instead of horizontal scroll */
+    .form-pills {
+      padding: 0;
+      flex-wrap: wrap;
+      overflow-x: visible;
+    }
+
+    /* Role tags (removable) */
+    .role-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin-bottom: var(--space-2);
+    }
+    .role-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: 6px 6px 6px 12px;
+      background: var(--color-gray-100);
+      color: var(--color-text-secondary);
+      border-radius: var(--radius-pill);
+      font: var(--text-label);
+    }
+    .role-tag-remove {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: var(--radius-pill);
+      color: var(--color-text-tertiary);
+      transition: color var(--transition-fast), background var(--transition-fast);
+    }
+    .role-tag-remove:hover {
+      color: var(--color-text-primary);
+      background: var(--color-gray-200);
+    }
+
+    /* Role input row */
+    .role-input-row {
+      display: flex;
+      gap: var(--space-2);
+    }
+    .role-input-row .input { flex: 1; }
+    .role-add-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: var(--touch-min);
+      height: var(--touch-min);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-input);
+      background: var(--color-surface);
+      color: var(--color-text-secondary);
+      transition: border-color var(--transition-fast), color var(--transition-fast);
+      flex-shrink: 0;
+    }
+    .role-add-btn:hover {
+      border-color: var(--color-border-emphasis);
+      color: var(--color-text-primary);
+    }
+
+    /* Number selector */
+    .number-selector {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .number-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-pill);
+      background: var(--color-surface);
+      color: var(--color-text-secondary);
+      transition: border-color var(--transition-fast), color var(--transition-fast);
+    }
+    .number-btn:hover {
+      border-color: var(--color-border-emphasis);
+      color: var(--color-text-primary);
+    }
+    .number-btn:disabled {
+      color: var(--color-text-quaternary);
+      cursor: not-allowed;
+    }
+    .number-value {
+      font: var(--text-heading);
+      color: var(--color-text-primary);
+      text-align: center;
+      min-width: 40px;
+    }
+
+    /* Option cards (visibility selector) */
+    .option-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2);
+    }
+    .option-card {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      padding: var(--space-3);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-card);
+      background: var(--color-surface);
+      cursor: pointer;
+      transition: border-color var(--transition-fast), background var(--transition-fast);
+    }
+    .option-card:hover { border-color: var(--color-border-emphasis); }
+    .option-card.selected {
+      border-color: var(--color-accent);
+      background: var(--color-accent-light);
+    }
+    .option-card svg { color: var(--color-text-secondary); }
+    .option-card.selected svg { color: var(--color-accent); }
+    .option-card-title {
+      font: var(--text-body-medium);
+      color: var(--color-text-primary);
+    }
+    .option-card-desc {
+      font: var(--text-caption);
+      color: var(--color-text-tertiary);
+    }
+
     /* Placeholder styling for screens not yet built */
     .placeholder {
       flex: 1;
@@ -987,9 +1204,104 @@
 
         <!-- Screen: Create -->
         <div class="screen" data-screen="create">
-          <!-- status-bar injected by JS -->
           <div class="status-bar-mount"></div>
-          <div class="placeholder"><div class="placeholder-content"><h3>Phase 3</h3><p>Create group form.</p></div></div>
+
+          <div class="top-nav top-nav-centered">
+            <button class="nav-text">Cancel</button>
+            <div class="nav-title">New group</div>
+            <div></div>
+          </div>
+
+          <div class="screen-content">
+            <form class="form" onsubmit="return false;">
+
+              <div class="form-field">
+                <label class="field-label" for="group-name">Group name</label>
+                <input class="input" id="group-name" type="text" value="Indie film project" placeholder="e.g., Building a habit tracker app" />
+              </div>
+
+              <div class="form-field">
+                <label class="field-label">Category</label>
+                <div class="pills-row form-pills">
+                  <button type="button" class="pill">Tech</button>
+                  <button type="button" class="pill">Sports</button>
+                  <button type="button" class="pill">Music</button>
+                  <button type="button" class="pill active">Creative</button>
+                  <button type="button" class="pill">Social</button>
+                  <button type="button" class="pill">Events</button>
+                  <button type="button" class="pill">Education</button>
+                  <button type="button" class="pill">Other</button>
+                </div>
+              </div>
+
+              <div class="form-field">
+                <label class="field-label" for="description">Description</label>
+                <div class="textarea-wrapper">
+                  <textarea class="input textarea" id="description" placeholder="What you're working on, who you need">Shooting a 10-minute short film in San Telmo this November. The script is ready. Looking for people who want to get reel material.</textarea>
+                  <span class="char-counter">130/280</span>
+                </div>
+              </div>
+
+              <div class="form-field">
+                <label class="field-label">Roles</label>
+                <div class="role-tags">
+                  <span class="role-tag">
+                    Sound designer
+                    <button type="button" class="role-tag-remove" aria-label="Remove Sound designer">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                    </button>
+                  </span>
+                  <span class="role-tag">
+                    Camera operator
+                    <button type="button" class="role-tag-remove" aria-label="Remove Camera operator">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                    </button>
+                  </span>
+                </div>
+                <div class="role-input-row">
+                  <input class="input" type="text" placeholder="Add a role..." />
+                  <button type="button" class="role-add-btn" aria-label="Add role">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                  </button>
+                </div>
+              </div>
+
+              <div class="form-field">
+                <label class="field-label">Group size</label>
+                <div class="number-selector">
+                  <button type="button" class="number-btn" aria-label="Decrease group size">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg>
+                  </button>
+                  <div class="number-value">5</div>
+                  <button type="button" class="number-btn" aria-label="Increase group size">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                  </button>
+                </div>
+                <p class="field-hint">Including you</p>
+              </div>
+
+              <div class="form-field">
+                <label class="field-label">Visibility</label>
+                <div class="option-cards">
+                  <label class="option-card selected">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    <div class="option-card-title">Public</div>
+                    <div class="option-card-desc">Anyone can find and apply</div>
+                  </label>
+                  <label class="option-card">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    <div class="option-card-title">Invite only</div>
+                    <div class="option-card-desc">Only people with a link</div>
+                  </label>
+                </div>
+              </div>
+
+            </form>
+          </div>
+
+          <div class="sticky-cta">
+            <button class="btn-primary">Create group</button>
+          </div>
         </div>
 
         <!-- Screen: My Groups -->
