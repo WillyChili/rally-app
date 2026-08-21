@@ -48,7 +48,10 @@
       --color-text-primary: var(--color-gray-900);
       --color-text-secondary: var(--color-gray-700);
       --color-text-tertiary: var(--color-gray-500);
-      --color-text-quaternary: var(--color-gray-400);
+      /* Quaternary is decoupled from --color-gray-400 (#A1A1AA) which fails WCAG AA
+         on white for small text. #767680 passes AA (4.51:1) while staying visibly
+         lighter than tertiary. --color-gray-400 remains available for icons/borders. */
+      --color-text-quaternary: #767680;
       --color-text-on-accent: var(--color-white);
 
       /* Typography */
@@ -267,6 +270,210 @@
     }
     .screen.active { display: flex; }
 
+    .screen-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ============================================================
+       APP COMPONENTS
+       ============================================================ */
+
+    /* App header (title + actions) */
+    .app-header {
+      height: 48px;
+      padding: 0 var(--space-4);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--color-surface);
+      flex-shrink: 0;
+    }
+    .app-header h1 {
+      font: var(--text-heading);
+      color: var(--color-text-primary);
+      margin: 0;
+    }
+    .icon-btn {
+      min-width: var(--touch-min);
+      min-height: var(--touch-min);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-tertiary);
+      transition: color var(--transition-fast);
+      margin-right: calc(var(--space-2) * -1);
+    }
+    .icon-btn:hover { color: var(--color-text-secondary); }
+
+    /* Horizontal pills row (scrollable) */
+    .pills-row {
+      display: flex;
+      gap: var(--space-2);
+      padding: 0 var(--space-4);
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      flex-shrink: 0;
+    }
+    .pills-row::-webkit-scrollbar { display: none; }
+    .pill {
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      background: var(--color-gray-100);
+      color: var(--color-text-secondary);
+      font: var(--text-overline);
+      letter-spacing: var(--tracking-wider);
+      text-transform: uppercase;
+      border: none;
+      white-space: nowrap;
+      transition: background var(--transition-fast), color var(--transition-fast);
+    }
+    .pill.active {
+      background: var(--color-accent);
+      color: var(--color-text-on-accent);
+    }
+
+    /* Section label (overline text used across screens) */
+    .section-label {
+      font: var(--text-overline);
+      color: var(--color-text-quaternary);
+      letter-spacing: var(--tracking-wider);
+      text-transform: uppercase;
+      padding: var(--space-5) var(--space-4) var(--space-3);
+      margin: 0;
+    }
+
+    /* Group card */
+    .group-card {
+      display: block;
+      width: calc(100% - var(--space-4) * 2);
+      margin: 0 var(--space-4) var(--space-3);
+      padding: var(--space-4);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-card);
+      text-align: left;
+      transition: transform var(--transition-fast), border-color var(--transition-fast);
+    }
+    .group-card:hover { border-color: var(--color-border-emphasis); }
+    .group-card:active { transform: scale(0.98); }
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-2);
+      margin-bottom: var(--space-3);
+    }
+    .pill-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      background: var(--color-gray-100);
+      color: var(--color-text-secondary);
+      font: var(--text-overline);
+      letter-spacing: var(--tracking-wider);
+      text-transform: uppercase;
+    }
+    .card-time {
+      font: var(--text-caption);
+      color: var(--color-text-quaternary);
+      white-space: nowrap;
+    }
+    .card-name {
+      font-family: var(--font-family);
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--color-text-primary);
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .card-desc {
+      font: var(--text-caption);
+      color: var(--color-text-tertiary);
+      margin: var(--space-1) 0 var(--space-3);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .card-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-2);
+    }
+    .spots {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      font: var(--text-caption);
+      color: var(--color-text-secondary);
+    }
+    .spots.almost-full { color: var(--color-accent); }
+    .spots.full { color: var(--color-text-quaternary); }
+    .card-creator {
+      font: var(--text-caption);
+      color: var(--color-text-quaternary);
+      white-space: nowrap;
+    }
+
+    /* Feed wrapper — leaves room above the tab bar */
+    .feed {
+      padding-bottom: var(--space-4);
+    }
+
+    /* Bottom tab bar */
+    .tab-bar {
+      position: sticky;
+      bottom: 0;
+      margin-top: auto;
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      padding-bottom: var(--safe-area-bottom);
+      display: flex;
+      align-items: stretch;
+      z-index: 5;
+      flex-shrink: 0;
+    }
+    .tab {
+      flex: 1;
+      min-height: var(--touch-min);
+      height: var(--tab-bar-height);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      color: var(--color-text-quaternary);
+      font-family: var(--font-family);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: var(--tracking-wide);
+      transition: color var(--transition-fast);
+    }
+    .tab.active { color: var(--color-accent); }
+    .tab .tab-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .tab-create .tab-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--color-accent);
+      color: var(--color-text-on-accent);
+      border-radius: var(--radius-pill);
+    }
+
     /* Placeholder styling for screens not yet built */
     .placeholder {
       flex: 1;
@@ -328,23 +535,153 @@
 
         <!-- Screen: Home -->
         <div class="screen active" data-screen="home">
-          <div class="status-bar">
-            <span class="time">9:41</span>
-            <span class="indicators">
-              <!-- signal -->
-              <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="7" width="3" height="4" rx="0.5"/><rect x="4.5" y="5" width="3" height="6" rx="0.5"/><rect x="9" y="2.5" width="3" height="8.5" rx="0.5"/><rect x="13.5" y="0" width="3" height="11" rx="0.5"/></svg>
-              <!-- wifi -->
-              <svg width="15" height="11" viewBox="0 0 15 11" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M7.5 0C4.7 0 2.2 1 0.3 2.7c-.3.3-.3.7-.1 1l1 1.1c.3.3.7.3 1 .1C3.7 3.6 5.5 3 7.5 3s3.8.6 5.3 1.9c.3.2.7.2 1-.1l1-1.1c.2-.3.2-.7-.1-1C12.8 1 10.3 0 7.5 0zM7.5 4.5c-1.8 0-3.5.6-4.8 1.7-.3.3-.3.7-.1 1l1 1.1c.2.3.6.3.9.1.8-.7 1.9-1.1 3-1.1s2.2.4 3 1.1c.3.2.7.2.9-.1l1-1.1c.2-.3.2-.7-.1-1C11 5.1 9.3 4.5 7.5 4.5zM7.5 9a1.5 1.5 0 100 3 1.5 1.5 0 000-3z"/></svg>
-              <!-- battery -->
-              <svg width="27" height="11" viewBox="0 0 27 11" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="0.5" y="0.5" width="22" height="10" rx="2.5" stroke="currentColor" opacity="0.35"/><rect x="2" y="2" width="19" height="7" rx="1.5" fill="currentColor"/><rect x="24" y="4" width="1.5" height="3" rx="0.5" fill="currentColor" opacity="0.4"/></svg>
-            </span>
-          </div>
-          <div class="placeholder">
-            <div class="placeholder-content">
-              <h3>Phase 1 — coming next</h3>
-              <p>Explore feed with category pills and group cards will render here.</p>
+          <div class="status-bar-mount"></div>
+          <div class="screen-content">
+            <header class="app-header">
+              <h1>Hey, Mati</h1>
+              <button class="icon-btn" aria-label="Notifications">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+              </button>
+            </header>
+
+            <nav class="pills-row" aria-label="Categories">
+              <button class="pill active">All</button>
+              <button class="pill">Tech</button>
+              <button class="pill">Sports</button>
+              <button class="pill">Music</button>
+              <button class="pill">Creative</button>
+              <button class="pill">Social</button>
+              <button class="pill">Events</button>
+              <button class="pill">Education</button>
+            </nav>
+
+            <h2 class="section-label">Near you</h2>
+
+            <div class="feed">
+              <button class="group-card">
+                <div class="card-top">
+                  <span class="pill-tag">Tech</span>
+                  <span class="card-time">2h ago</span>
+                </div>
+                <div class="card-name">Habit tracker app</div>
+                <div class="card-desc">Building a minimal habit tracking app. Looking for a React Native dev and someone to handle backend.</div>
+                <div class="card-bottom">
+                  <span class="spots almost-full">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    1/3 spots
+                  </span>
+                  <span class="card-creator">by Mati R.</span>
+                </div>
+              </button>
+
+              <button class="group-card">
+                <div class="card-top">
+                  <span class="pill-tag">Sports</span>
+                  <span class="card-time">5h ago</span>
+                </div>
+                <div class="card-name">Sunday 5-a-side</div>
+                <div class="card-desc">Weekly football in Palermo. We play every Sunday 10am, need 2 more regulars.</div>
+                <div class="card-bottom">
+                  <span class="spots">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    8/10 spots
+                  </span>
+                  <span class="card-creator">by Nico F.</span>
+                </div>
+              </button>
+
+              <button class="group-card">
+                <div class="card-top">
+                  <span class="pill-tag">Music</span>
+                  <span class="card-time">1d ago</span>
+                </div>
+                <div class="card-name">Jazz trio for bar gigs</div>
+                <div class="card-desc">Keys player and drummer looking for a bass player. We rehearse Thursdays in Villa Crespo.</div>
+                <div class="card-bottom">
+                  <span class="spots">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    2/3 spots
+                  </span>
+                  <span class="card-creator">by Javier M.</span>
+                </div>
+              </button>
+
+              <button class="group-card">
+                <div class="card-top">
+                  <span class="pill-tag">Social</span>
+                  <span class="card-time">2d ago</span>
+                </div>
+                <div class="card-name">Weekend hiking crew</div>
+                <div class="card-desc">Monthly hikes around Buenos Aires province. All levels welcome. Next: Tandil in March.</div>
+                <div class="card-bottom">
+                  <span class="spots">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    5/8 spots
+                  </span>
+                  <span class="card-creator">by Cami L.</span>
+                </div>
+              </button>
+
+              <button class="group-card">
+                <div class="card-top">
+                  <span class="pill-tag">Creative</span>
+                  <span class="card-time">3d ago</span>
+                </div>
+                <div class="card-name">Short film crew</div>
+                <div class="card-desc">Shooting a 10-min short in San Telmo. Need a sound person and a second camera op.</div>
+                <div class="card-bottom">
+                  <span class="spots">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    3/5 spots
+                  </span>
+                  <span class="card-creator">by Ana P.</span>
+                </div>
+              </button>
+
+              <button class="group-card">
+                <div class="card-top">
+                  <span class="pill-tag">Education</span>
+                  <span class="card-time">4d ago</span>
+                </div>
+                <div class="card-name">IELTS study group</div>
+                <div class="card-desc">Preparing for December IELTS. Meeting twice a week on Zoom to practice speaking.</div>
+                <div class="card-bottom">
+                  <span class="spots">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    4/6 spots
+                  </span>
+                  <span class="card-creator">by Lucia T.</span>
+                </div>
+              </button>
             </div>
           </div>
+
+          <nav class="tab-bar" aria-label="Main navigation">
+            <button class="tab active" aria-label="Explore">
+              <span class="tab-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+              </span>
+              Explore
+            </button>
+            <button class="tab" aria-label="Search">
+              <span class="tab-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              </span>
+              Search
+            </button>
+            <button class="tab tab-create" aria-label="Create">
+              <span class="tab-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+              </span>
+              Create
+            </button>
+            <button class="tab" aria-label="Profile">
+              <span class="tab-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </span>
+              Profile
+            </button>
+          </nav>
         </div>
 
         <!-- Screen: Detail -->
