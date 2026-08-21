@@ -599,7 +599,7 @@
     .avatar-lg {
       width: 64px;
       height: 64px;
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 600;
       background: var(--color-gray-900);
       color: var(--color-white);
@@ -1064,6 +1064,108 @@
     .applicant-actions {
       margin-top: var(--space-3);
     }
+
+    /* ============================================================
+       PROFILE COMPONENTS (Phase 5)
+       ============================================================ */
+
+    .profile-header {
+      padding: var(--space-5) var(--space-4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .profile-name {
+      font: var(--text-title);
+      color: var(--color-text-primary);
+      margin: var(--space-3) 0 0;
+      letter-spacing: var(--tracking-tight);
+    }
+    .profile-bio {
+      font: var(--text-body);
+      color: var(--color-text-tertiary);
+      margin: var(--space-1) 0 0;
+      max-width: 280px;
+    }
+    .profile-location {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      font: var(--text-caption);
+      color: var(--color-text-quaternary);
+      margin-top: var(--space-2);
+    }
+
+    /* Profile section wrapper (skills + interests) */
+    .profile-section {
+      padding: 0 var(--space-4) var(--space-5);
+    }
+    .profile-section .section-label {
+      padding: 0 0 var(--space-3);
+    }
+
+    /* Tag (interest chip) */
+    .tags-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      background: var(--color-gray-100);
+      color: var(--color-text-secondary);
+      font: var(--text-label);
+    }
+
+    /* Stats row (Created / Joined / Applied) */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      padding: var(--space-5) var(--space-4);
+    }
+    .stat {
+      text-align: center;
+      padding: 0 var(--space-2);
+      border-right: 1px solid var(--color-border);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font: var(--text-heading);
+      color: var(--color-text-primary);
+    }
+    .stat-label {
+      font: var(--text-caption);
+      color: var(--color-text-tertiary);
+      margin-top: 2px;
+    }
+
+    /* Menu list (Profile screen) */
+    .menu-list {
+      margin: 0 var(--space-4) var(--space-4);
+    }
+    .menu-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      min-height: 48px;
+      border: none;
+      border-bottom: 1px solid var(--color-border);
+      background: transparent;
+      font: var(--text-body);
+      color: var(--color-text-primary);
+      text-align: left;
+      transition: color var(--transition-fast);
+      padding: 0;
+    }
+    .menu-item:hover { color: var(--color-text-secondary); }
+    .menu-item.destructive { color: var(--color-error); }
+    .menu-item.destructive:hover { color: var(--color-error); opacity: 0.85; }
+    .menu-chevron { color: var(--color-text-quaternary); flex-shrink: 0; }
 
     /* Placeholder styling for screens not yet built */
     .placeholder {
@@ -1577,9 +1679,92 @@
 
         <!-- Screen: Profile -->
         <div class="screen" data-screen="profile">
-          <!-- status-bar injected by JS -->
           <div class="status-bar-mount"></div>
-          <div class="placeholder"><div class="placeholder-content"><h3>Phase 5</h3><p>Profile screen.</p></div></div>
+
+          <div class="screen-content">
+            <div class="profile-header">
+              <span class="avatar avatar-lg">MR</span>
+              <h1 class="profile-name">Mati Ruiz</h1>
+              <p class="profile-bio">Product designer. Building things on the side.</p>
+              <span class="profile-location">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Buenos Aires, AR
+              </span>
+            </div>
+
+            <div class="profile-section">
+              <h2 class="section-label">Skills & interests</h2>
+              <div class="tags-row">
+                <span class="tag">React</span>
+                <span class="tag">Figma</span>
+                <span class="tag">UX Research</span>
+                <span class="tag">Node.js</span>
+                <span class="tag">Football</span>
+                <span class="tag">Guitar</span>
+                <span class="tag">Hiking</span>
+              </div>
+            </div>
+
+            <div class="stats-row">
+              <div class="stat">
+                <div class="stat-number">2</div>
+                <div class="stat-label">Created</div>
+              </div>
+              <div class="stat">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Joined</div>
+              </div>
+              <div class="stat">
+                <div class="stat-number">5</div>
+                <div class="stat-label">Applied</div>
+              </div>
+            </div>
+
+            <div class="menu-list">
+              <button class="menu-item">
+                My groups
+                <svg class="menu-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+              </button>
+              <button class="menu-item">
+                Edit profile
+                <svg class="menu-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+              </button>
+              <button class="menu-item">
+                Notifications
+                <svg class="menu-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+              </button>
+              <button class="menu-item destructive">
+                Sign out
+              </button>
+            </div>
+          </div>
+
+          <nav class="tab-bar" aria-label="Main navigation">
+            <button class="tab" aria-label="Explore">
+              <span class="tab-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+              </span>
+              Explore
+            </button>
+            <button class="tab" aria-label="Search">
+              <span class="tab-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              </span>
+              Search
+            </button>
+            <button class="tab tab-create" aria-label="Create">
+              <span class="tab-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+              </span>
+              Create
+            </button>
+            <button class="tab active" aria-label="Profile">
+              <span class="tab-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </span>
+              Profile
+            </button>
+          </nav>
         </div>
 
         <!-- Screen: Search -->
