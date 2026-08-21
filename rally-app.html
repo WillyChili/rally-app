@@ -33,8 +33,8 @@
       --color-accent-light: #EEF2FF;
       --color-accent-subtle: #E0E7FF;
 
-      /* Semantic */
-      --color-success: #059669;
+      /* Semantic — success darkened from #059669 to pass WCAG AA on white (5.47:1) */
+      --color-success: #047857;
       --color-error: #DC2626;
       --color-warning: #D97706;
 
@@ -52,6 +52,9 @@
          on white for small text. #767680 passes AA (4.51:1) while staying visibly
          lighter than tertiary. --color-gray-400 remains available for icons/borders. */
       --color-text-quaternary: #767680;
+      /* Use on gray-100 backgrounds (search input, segmented control) — tertiary
+         fails AA against gray-100 at 4.41:1; this darker value hits 6.13:1. */
+      --color-text-tertiary-on-gray: #5B5B62;
       --color-text-on-accent: var(--color-white);
 
       /* Typography */
@@ -83,6 +86,7 @@
 
       /* Component tokens */
       --radius-input: 4px;
+      --radius-sm: 6px;
       --radius-button: 8px;
       --radius-card: 12px;
       --radius-pill: 9999px;
@@ -122,6 +126,42 @@
       background: none;
       padding: 0;
       color: inherit;
+    }
+
+    /* Focus indication — WCAG 2.4.7 */
+    :focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+      border-radius: var(--radius-input);
+    }
+    /* Inputs already have their own focus ring via box-shadow, so hide the outline for them */
+    .input:focus-visible,
+    .search-input:focus-visible,
+    .textarea:focus-visible {
+      outline: none;
+    }
+
+    /* Screen reader only */
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* Respect user motion preferences — WCAG 2.3.3 */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
     }
 
     /* ============================================================
@@ -742,6 +782,7 @@
       color: var(--color-text-primary);
       align-self: center;
       white-space: nowrap;
+      margin: 0;
     }
 
     /* Form */
@@ -784,6 +825,22 @@
       outline: none;
       border-color: var(--color-accent);
       box-shadow: 0 0 0 3px var(--color-accent-light);
+    }
+    .input:disabled {
+      background: var(--color-gray-50);
+      color: var(--color-text-quaternary);
+      cursor: not-allowed;
+    }
+    .input.error {
+      border-color: var(--color-error);
+    }
+    .input.error:focus {
+      box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+    }
+    .field-error {
+      font: var(--text-caption);
+      color: var(--color-error);
+      margin-top: var(--space-1);
     }
 
     /* Textarea variant */
@@ -958,9 +1015,9 @@
     .segment {
       flex: 1;
       height: 36px;
-      border-radius: 6px;
+      border-radius: var(--radius-sm);
       font: var(--text-body);
-      color: var(--color-text-tertiary);
+      color: var(--color-text-tertiary-on-gray);
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -1197,7 +1254,7 @@
       font-family: var(--font-family);
       transition: background var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
     }
-    .search-input::placeholder { color: var(--color-text-tertiary); }
+    .search-input::placeholder { color: var(--color-text-tertiary-on-gray); }
     .search-input:focus {
       outline: none;
       background: var(--color-surface);
@@ -1751,7 +1808,7 @@
 
           <div class="top-nav top-nav-centered">
             <button class="nav-text">Cancel</button>
-            <div class="nav-title">New group</div>
+            <h1 class="nav-title">New group</h1>
             <div></div>
           </div>
 
@@ -1824,14 +1881,14 @@
               </div>
 
               <div class="form-field">
-                <label class="field-label">Visibility</label>
-                <div class="option-cards">
-                  <label class="option-card selected">
+                <label class="field-label" id="visibility-label">Visibility</label>
+                <div class="option-cards" role="radiogroup" aria-labelledby="visibility-label">
+                  <label class="option-card selected" role="radio" aria-checked="true" tabindex="0">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
                     <div class="option-card-title">Public</div>
                     <div class="option-card-desc">Anyone can find and apply</div>
                   </label>
-                  <label class="option-card">
+                  <label class="option-card" role="radio" aria-checked="false" tabindex="-1">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                     <div class="option-card-title">Invite only</div>
                     <div class="option-card-desc">Only people with a link</div>
@@ -2056,7 +2113,7 @@
           <div class="screen-content">
             <div class="search-input-wrapper">
               <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-              <input class="search-input" type="search" placeholder="Search groups..." />
+              <input class="search-input" type="search" placeholder="Search groups..." aria-label="Search groups" />
             </div>
 
             <nav class="pills-row filter-chips" aria-label="Filters">
@@ -2308,11 +2365,102 @@
                   <span class="component-item-label">input — form field</span>
                 </div>
                 <div class="component-item">
+                  <input class="input error" value="Too short" />
+                  <div class="field-error">Must be at least 3 characters</div>
+                  <span class="component-item-label">input.error + .field-error</span>
+                </div>
+                <div class="component-item">
+                  <input class="input" placeholder="Disabled input" disabled />
+                  <span class="component-item-label">input:disabled</span>
+                </div>
+                <div class="component-item">
                   <div class="search-input-wrapper" style="padding: 0; position: relative;">
                     <svg class="search-icon" style="left: var(--space-3);" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
                     <input class="search-input" placeholder="Search input" />
                   </div>
                   <span class="component-item-label">search-input — surface variant</span>
+                </div>
+              </div>
+
+              <h3 class="ds-subheading">Segmented control</h3>
+              <div class="components-list">
+                <div class="component-item">
+                  <div class="segmented" style="margin: 0;" role="tablist">
+                    <button class="segment active" role="tab">Option A</button>
+                    <button class="segment" role="tab">Option B</button>
+                  </div>
+                  <span class="component-item-label">segmented + segment.active</span>
+                </div>
+              </div>
+
+              <h3 class="ds-subheading">Number stepper</h3>
+              <div class="components-list">
+                <div class="component-item">
+                  <div class="number-selector">
+                    <button class="number-btn" aria-label="Decrease">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg>
+                    </button>
+                    <div class="number-value">5</div>
+                    <button class="number-btn" aria-label="Increase">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                    </button>
+                  </div>
+                  <span class="component-item-label">number-selector — 36px circular buttons</span>
+                </div>
+              </div>
+
+              <h3 class="ds-subheading">Option cards</h3>
+              <div class="components-list">
+                <div class="component-item">
+                  <div class="option-cards">
+                    <label class="option-card selected">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                      <div class="option-card-title">Selected</div>
+                      <div class="option-card-desc">Accent border, tinted background</div>
+                    </label>
+                    <label class="option-card">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                      <div class="option-card-title">Default</div>
+                      <div class="option-card-desc">Neutral border, white background</div>
+                    </label>
+                  </div>
+                  <span class="component-item-label">option-card + option-card.selected</span>
+                </div>
+              </div>
+
+              <h3 class="ds-subheading">Menu row</h3>
+              <div class="components-list">
+                <div class="component-item">
+                  <div>
+                    <button class="menu-item">
+                      Default menu item
+                      <svg class="menu-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+                    </button>
+                    <button class="menu-item destructive">Destructive action</button>
+                  </div>
+                  <span class="component-item-label">menu-item + menu-item.destructive</span>
+                </div>
+              </div>
+
+              <h3 class="ds-subheading">Applicant card</h3>
+              <div class="components-list">
+                <div class="component-item">
+                  <div class="applicant-card">
+                    <div class="applicant-top">
+                      <span class="avatar avatar-md">AB</span>
+                      <div class="applicant-info">
+                        <div class="applicant-name">Applicant Name</div>
+                        <div class="applicant-role">for Role name</div>
+                      </div>
+                      <span class="applicant-time">2h ago</span>
+                    </div>
+                    <p class="applicant-message">Short self-description that fits in one or two lines.</p>
+                    <div class="applicant-actions btn-row">
+                      <button class="btn-primary btn-sm">Accept</button>
+                      <button class="btn-secondary btn-sm">Decline</button>
+                    </div>
+                  </div>
+                  <span class="component-item-label">applicant-card with Accept/Decline pair</span>
                 </div>
               </div>
 
