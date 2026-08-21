@@ -474,6 +474,221 @@
       border-radius: var(--radius-pill);
     }
 
+    /* ============================================================
+       DETAIL SCREEN COMPONENTS (Phase 2)
+       ============================================================ */
+
+    /* Top nav — back button + right actions, sticks below status bar */
+    .top-nav {
+      position: sticky;
+      top: var(--safe-area-top);
+      z-index: 4;
+      height: 48px;
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--space-2) 0 var(--space-3);
+      flex-shrink: 0;
+    }
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      min-height: var(--touch-min);
+      padding: 0 var(--space-2);
+      color: var(--color-text-primary);
+    }
+    .nav-back .back-label {
+      font: var(--text-label);
+      color: var(--color-text-secondary);
+      transition: color var(--transition-fast);
+    }
+    .nav-back:hover .back-label { color: var(--color-text-primary); }
+
+    /* Detail header block */
+    .detail-header { padding: var(--space-5) var(--space-4) 0; }
+    .detail-title {
+      font: var(--text-title);
+      color: var(--color-text-primary);
+      margin: var(--space-2) 0 0;
+      letter-spacing: var(--tracking-tight);
+    }
+    .detail-status {
+      font: var(--text-label);
+      color: var(--color-text-tertiary);
+      margin-top: var(--space-2);
+    }
+    .status-open {
+      color: var(--color-success);
+      font-weight: 600;
+    }
+    .status-urgent {
+      color: var(--color-accent);
+      font-weight: 600;
+    }
+
+    /* Description block */
+    .detail-description { padding: var(--space-5) var(--space-4); }
+    .detail-description p {
+      font: var(--text-body);
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Divider (used between sections in detail views) */
+    .divider {
+      height: 1px;
+      background: var(--color-border);
+      margin: 0 var(--space-4);
+    }
+
+    /* Role list */
+    .role-list {
+      list-style: none;
+      padding: 0 var(--space-4);
+      margin: var(--space-3) 0 var(--space-5);
+    }
+    .role-row {
+      display: flex;
+      align-items: center;
+      min-height: var(--touch-min);
+      gap: var(--space-3);
+      padding: var(--space-1) 0;
+    }
+    .role-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: var(--radius-pill);
+      background: var(--color-accent);
+      flex-shrink: 0;
+    }
+    .role-dot.filled { background: var(--color-gray-300); }
+    .role-name {
+      font: var(--text-body-medium);
+      color: var(--color-text-primary);
+      flex: 1;
+    }
+    .role-name.filled { color: var(--color-text-tertiary); }
+    .role-status {
+      font: var(--text-caption);
+      color: var(--color-text-quaternary);
+    }
+    .role-status.open { color: var(--color-accent); }
+
+    /* Avatar with initials */
+    .avatar {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-gray-100);
+      color: var(--color-text-secondary);
+      border-radius: 50%;
+      font-family: var(--font-family);
+      font-weight: 500;
+      flex-shrink: 0;
+      letter-spacing: var(--tracking-normal);
+    }
+    .avatar-md {
+      width: 36px;
+      height: 36px;
+      font-size: 13px;
+    }
+    .avatar-lg {
+      width: 64px;
+      height: 64px;
+      font-size: 22px;
+      font-weight: 600;
+      background: var(--color-gray-900);
+      color: var(--color-white);
+    }
+
+    /* Member row */
+    .member-list {
+      padding: 0 var(--space-4);
+      margin: var(--space-3) 0 var(--space-5);
+    }
+    .member-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .member-info { flex: 1; min-width: 0; }
+    .member-name {
+      font: var(--text-body-medium);
+      color: var(--color-text-primary);
+    }
+    .member-role {
+      font: var(--text-caption);
+      color: var(--color-text-tertiary);
+    }
+    .badge {
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      background: var(--color-gray-100);
+      color: var(--color-text-secondary);
+      font: var(--text-overline);
+      letter-spacing: var(--tracking-wider);
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+
+    /* Metadata card — secondary card variant on canvas bg */
+    .metadata-card {
+      display: flex;
+      padding: var(--space-4);
+      background: var(--color-canvas);
+      border-radius: var(--radius-card);
+      margin: var(--space-4);
+      gap: var(--space-4);
+    }
+    .meta-item { flex: 1; min-width: 0; }
+    .meta-label {
+      font: var(--text-caption);
+      color: var(--color-text-tertiary);
+      margin-bottom: 2px;
+    }
+    .meta-value {
+      font: var(--text-label);
+      color: var(--color-text-secondary);
+    }
+
+    /* Sticky bottom CTA container */
+    .sticky-cta {
+      position: sticky;
+      bottom: 0;
+      margin-top: auto;
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      padding: var(--space-4);
+      padding-bottom: calc(var(--space-4) + var(--safe-area-bottom));
+      z-index: 5;
+      flex-shrink: 0;
+    }
+    .cta-subcopy {
+      font: var(--text-caption);
+      color: var(--color-text-tertiary);
+      text-align: center;
+      margin: var(--space-2) 0 0;
+    }
+
+    /* Primary button */
+    .btn-primary {
+      width: 100%;
+      min-height: var(--touch-min);
+      background: var(--color-accent);
+      color: var(--color-text-on-accent);
+      border-radius: var(--radius-button);
+      font: var(--text-body-medium);
+      text-align: center;
+      transition: background var(--transition-fast);
+      padding: 0 var(--space-4);
+    }
+    .btn-primary:hover { background: var(--color-accent-hover); }
+    .btn-primary:active { background: var(--color-accent-pressed); }
+
     /* Placeholder styling for screens not yet built */
     .placeholder {
       flex: 1;
@@ -686,9 +901,88 @@
 
         <!-- Screen: Detail -->
         <div class="screen" data-screen="detail">
-          <!-- status-bar injected by JS -->
           <div class="status-bar-mount"></div>
-          <div class="placeholder"><div class="placeholder-content"><h3>Phase 2</h3><p>Group detail screen.</p></div></div>
+
+          <div class="top-nav">
+            <button class="nav-back" aria-label="Back">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+              <span class="back-label">Back</span>
+            </button>
+            <button class="icon-btn" aria-label="Share">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            </button>
+          </div>
+
+          <div class="screen-content">
+            <div class="detail-header">
+              <span class="pill-tag">Tech</span>
+              <h1 class="detail-title">Habit tracker app</h1>
+              <div class="detail-status"><span class="status-open">Open</span> · <span class="status-urgent">1 spot left</span></div>
+            </div>
+
+            <div class="detail-description">
+              <p>Building a minimal habit tracking app for iOS. The idea is simple: daily check-ins, streak tracking, and weekly summaries. No social features, no gamification — just a clean tool that helps you show up. Looking for a React Native dev to lead the build and someone comfortable with Node + Postgres for the API.</p>
+            </div>
+
+            <div class="divider"></div>
+
+            <section>
+              <h2 class="section-label">Looking for</h2>
+              <ul class="role-list">
+                <li class="role-row">
+                  <span class="role-dot"></span>
+                  <span class="role-name">React Native developer</span>
+                  <span class="role-status open">Open</span>
+                </li>
+                <li class="role-row">
+                  <span class="role-dot"></span>
+                  <span class="role-name">Backend developer</span>
+                  <span class="role-status open">Open</span>
+                </li>
+                <li class="role-row">
+                  <span class="role-dot filled"></span>
+                  <span class="role-name filled">Designer</span>
+                  <span class="role-status">Filled</span>
+                </li>
+              </ul>
+            </section>
+
+            <div class="divider"></div>
+
+            <section>
+              <h2 class="section-label">Members · 1/3</h2>
+              <div class="member-list">
+                <div class="member-row">
+                  <span class="avatar avatar-md">MR</span>
+                  <div class="member-info">
+                    <div class="member-name">Mati Ruiz</div>
+                    <div class="member-role">Designer</div>
+                  </div>
+                  <span class="badge">Creator</span>
+                </div>
+              </div>
+            </section>
+
+            <div class="metadata-card">
+              <div class="meta-item">
+                <div class="meta-label">Created</div>
+                <div class="meta-value">Aug 18</div>
+              </div>
+              <div class="meta-item">
+                <div class="meta-label">Category</div>
+                <div class="meta-value">Tech</div>
+              </div>
+              <div class="meta-item">
+                <div class="meta-label">Location</div>
+                <div class="meta-value">Buenos Aires</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sticky-cta">
+            <button class="btn-primary">Apply to join</button>
+            <p class="cta-subcopy">You'll be notified when the creator responds</p>
+          </div>
         </div>
 
         <!-- Screen: Create -->
