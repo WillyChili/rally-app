@@ -1167,6 +1167,126 @@
     .menu-item.destructive:hover { color: var(--color-error); opacity: 0.85; }
     .menu-chevron { color: var(--color-text-quaternary); flex-shrink: 0; }
 
+    /* ============================================================
+       SEARCH COMPONENTS (Phase 6)
+       ============================================================ */
+
+    /* Search input wrapper */
+    .search-input-wrapper {
+      position: relative;
+      padding: var(--space-3) var(--space-4) 0;
+      flex-shrink: 0;
+    }
+    .search-icon {
+      position: absolute;
+      top: 50%;
+      left: calc(var(--space-4) + var(--space-3));
+      transform: translateY(-50%);
+      color: var(--color-text-quaternary);
+      pointer-events: none;
+    }
+    .search-input {
+      width: 100%;
+      min-height: var(--touch-min);
+      padding: 0 var(--space-3) 0 calc(var(--space-3) + 20px + var(--space-2));
+      border: 1px solid transparent;
+      border-radius: var(--radius-card);
+      background: var(--color-gray-100);
+      font: var(--text-body);
+      color: var(--color-text-primary);
+      font-family: var(--font-family);
+      transition: background var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+    .search-input::placeholder { color: var(--color-text-tertiary); }
+    .search-input:focus {
+      outline: none;
+      background: var(--color-surface);
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px var(--color-accent-light);
+    }
+
+    /* Filter chips (row extends .pills-row) */
+    .filter-chips {
+      padding-top: var(--space-3);
+    }
+    .filter-chip {
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      background: var(--color-gray-100);
+      color: var(--color-text-secondary);
+      font: var(--text-label);
+      border: 1px solid transparent;
+      white-space: nowrap;
+      transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+    }
+    .filter-chip .chevron { color: var(--color-text-quaternary); }
+    .filter-chip:hover .chevron { color: var(--color-text-secondary); }
+    .filter-chip:hover { color: var(--color-text-primary); }
+    .filter-chip.active {
+      background: var(--color-accent-light);
+      color: var(--color-accent);
+      border-color: var(--color-accent);
+    }
+
+    /* Empty state */
+    .empty-state {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-9) var(--space-6);
+      text-align: center;
+    }
+    .empty-icon { color: var(--color-text-quaternary); }
+    .empty-headline {
+      font: var(--text-heading);
+      color: var(--color-text-primary);
+      margin: var(--space-4) 0 0;
+    }
+    .empty-body {
+      font: var(--text-body);
+      color: var(--color-text-tertiary);
+      margin: var(--space-2) 0 0;
+      max-width: 260px;
+    }
+    .empty-cta {
+      font: var(--text-body-medium);
+      color: var(--color-accent);
+      background: none;
+      border: none;
+      margin-top: var(--space-4);
+      padding: var(--space-2) var(--space-3);
+      min-height: var(--touch-min);
+      transition: color var(--transition-fast);
+      font-family: var(--font-family);
+    }
+    .empty-cta:hover { color: var(--color-accent-hover); }
+
+    /* Caption toggle (meta control below device frame) */
+    .caption-toggle {
+      display: none;
+      margin: var(--space-3) auto 0;
+      padding: 6px var(--space-3);
+      font: var(--text-caption);
+      color: var(--color-text-secondary);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-pill);
+      font-family: var(--font-family);
+      transition: border-color var(--transition-fast), color var(--transition-fast);
+    }
+    .caption-toggle.visible { display: inline-block; }
+    .caption-toggle:hover {
+      border-color: var(--color-border-emphasis);
+      color: var(--color-text-primary);
+    }
+
     /* Placeholder styling for screens not yet built */
     .placeholder {
       flex: 1;
@@ -1769,9 +1889,111 @@
 
         <!-- Screen: Search -->
         <div class="screen" data-screen="search">
-          <!-- status-bar injected by JS -->
           <div class="status-bar-mount"></div>
-          <div class="placeholder"><div class="placeholder-content"><h3>Phase 6</h3><p>Search screen.</p></div></div>
+
+          <div class="screen-content">
+            <div class="search-input-wrapper">
+              <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              <input class="search-input" type="search" placeholder="Search groups..." />
+            </div>
+
+            <nav class="pills-row filter-chips" aria-label="Filters">
+              <button class="filter-chip">
+                Category
+                <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <button class="filter-chip active">Open spots</button>
+              <button class="filter-chip">Small (2–4)</button>
+              <button class="filter-chip">Medium (5–7)</button>
+              <button class="filter-chip">Large (8–10)</button>
+            </nav>
+
+            <h2 class="section-label">3 results</h2>
+
+            <div class="feed" data-search-view="results">
+              <button class="group-card">
+                <div class="card-top">
+                  <span class="pill-tag">Sports</span>
+                  <span class="card-time">5h ago</span>
+                </div>
+                <div class="card-name">Sunday 5-a-side</div>
+                <div class="card-desc">Weekly football in Palermo. We play every Sunday 10am, need 2 more regulars.</div>
+                <div class="card-bottom">
+                  <span class="spots">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    8/10 spots
+                  </span>
+                  <span class="card-creator">by Nico F.</span>
+                </div>
+              </button>
+
+              <button class="group-card">
+                <div class="card-top">
+                  <span class="pill-tag">Music</span>
+                  <span class="card-time">1d ago</span>
+                </div>
+                <div class="card-name">Jazz trio for bar gigs</div>
+                <div class="card-desc">Keys player and drummer looking for a bass player. We rehearse Thursdays in Villa Crespo.</div>
+                <div class="card-bottom">
+                  <span class="spots">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    2/3 spots
+                  </span>
+                  <span class="card-creator">by Javier M.</span>
+                </div>
+              </button>
+
+              <button class="group-card">
+                <div class="card-top">
+                  <span class="pill-tag">Social</span>
+                  <span class="card-time">2d ago</span>
+                </div>
+                <div class="card-name">Weekend hiking crew</div>
+                <div class="card-desc">Monthly hikes around Buenos Aires province. All levels welcome. Next: Tandil in March.</div>
+                <div class="card-bottom">
+                  <span class="spots">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    5/8 spots
+                  </span>
+                  <span class="card-creator">by Cami L.</span>
+                </div>
+              </button>
+            </div>
+
+            <div class="empty-state" data-search-view="empty" hidden>
+              <svg class="empty-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><line x1="4" y1="20" x2="20" y2="4"/></svg>
+              <h2 class="empty-headline">No groups found</h2>
+              <p class="empty-body">Try broadening your search, or create a new group.</p>
+              <button class="empty-cta">Create a group</button>
+            </div>
+          </div>
+
+          <nav class="tab-bar" aria-label="Main navigation">
+            <button class="tab" aria-label="Explore">
+              <span class="tab-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+              </span>
+              Explore
+            </button>
+            <button class="tab active" aria-label="Search">
+              <span class="tab-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              </span>
+              Search
+            </button>
+            <button class="tab tab-create" aria-label="Create">
+              <span class="tab-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+              </span>
+              Create
+            </button>
+            <button class="tab" aria-label="Profile">
+              <span class="tab-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </span>
+              Profile
+            </button>
+          </nav>
         </div>
 
       </div>
@@ -1780,6 +2002,7 @@
     <div class="device-caption">
       <span class="name" id="captionName">Home / Explore</span>
       <span class="desc" id="captionDesc">The explore feed — categories, group cards, group discovery.</span>
+      <button class="caption-toggle" id="searchStateToggle">Preview empty state</button>
     </div>
   </section>
 
@@ -1807,6 +2030,18 @@
       const viewport = document.getElementById('deviceViewport');
       const captionName = document.getElementById('captionName');
       const captionDesc = document.getElementById('captionDesc');
+      const searchStateToggle = document.getElementById('searchStateToggle');
+
+      // Reset search view to "results" whenever we leave or re-enter the screen
+      const resetSearchView = () => {
+        const searchScreen = viewport.querySelector('.screen[data-screen="search"]');
+        if (!searchScreen) return;
+        const results = searchScreen.querySelector('[data-search-view="results"]');
+        const empty = searchScreen.querySelector('[data-search-view="empty"]');
+        if (results) results.hidden = false;
+        if (empty) empty.hidden = true;
+        searchStateToggle.textContent = 'Preview empty state';
+      };
 
       selector.addEventListener('click', (e) => {
         const btn = e.target.closest('button');
@@ -1824,7 +2059,32 @@
         captionName.textContent = btn.textContent.trim();
         captionDesc.textContent = btn.dataset.desc || '';
 
+        // Show the empty-state toggle only on Search
+        resetSearchView();
+        searchStateToggle.classList.toggle('visible', screen === 'search');
+
         viewport.scrollTop = 0;
+      });
+
+      // Empty-state toggle
+      searchStateToggle.addEventListener('click', () => {
+        const searchScreen = viewport.querySelector('.screen[data-screen="search"]');
+        if (!searchScreen) return;
+        const results = searchScreen.querySelector('[data-search-view="results"]');
+        const empty = searchScreen.querySelector('[data-search-view="empty"]');
+        const sectionLabel = searchScreen.querySelector('.section-label');
+        const showingEmpty = !empty.hidden;
+        if (showingEmpty) {
+          results.hidden = false;
+          empty.hidden = true;
+          if (sectionLabel) sectionLabel.hidden = false;
+          searchStateToggle.textContent = 'Preview empty state';
+        } else {
+          results.hidden = true;
+          empty.hidden = false;
+          if (sectionLabel) sectionLabel.hidden = true;
+          searchStateToggle.textContent = 'Preview results';
+        }
       });
     })();
   </script>
